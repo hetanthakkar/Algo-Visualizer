@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<script type = "text/javascript" >
+var a=[
+{ y: 10}, 
+    { y: 9 },
+    { y: 7}, 
+    { y: 6}, 
+   
+    { y: 5 },
+    { y: 4}, 
+    { y: 3}, 
+]
+var chart
+window.onload = function () {
+ chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+  
+    title : {
+				text : "Insertion Sort Visualizer"
+			},
+      data: [
+      {      
+        indexLabelFontSize: 25,
+        indexLabelFontFamily:"Lucida Console" ,
+        indexLabel: "{y}",
+        type: "column",
+        indexLabelPlacement:"inside",
+        indexLabelOrientation:"horizontal",
+        dataPoints : a,
+      }],
+        });
+        
+      chart.render()
+       
+var tempo =1
+var updateChart =  async function () {
+  for (let i=tempo;i<a.length;i++){
+    var temp =i  
+    for (let j=temp;j>=0;j--){
+      console.log("entered")
+      if(a[temp].y<a[temp-1].y&& j>=0){
+        [a[temp].y,a[temp-1].y]=[a[temp-1].y,a[temp].y]
+        console.log(`array is ${a[0].y} ${a[1].y} ${a[2].y} ${a[3].y}`)
+        chart.render()
+        await new Promise(resolve => setTimeout(resolve, 1000)); 
+         temp=temp-1
+      }
+    }
+    tempo++
+    break
+  }
+};
+setInterval( function(){ updateChart()}, 1000);
+}	
+ function callthat(){
+   chart.render()
+}
+</script>
+</head>
+<body>
+<div id = "chartContainer" style = "height: 300px; width: 100%;" />
+</body>
+</html>
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<script type = "text/javascript" >
+var a=[
+{ y: 10}, 
+    { y: 9 },
+    { y: 7}, 
+    { y: 6}, 
+    { y: 1 },
+    { y: 4}, 
+    { y: 3}, 
+]
+var chart
+window.onload = function () {
+ chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+  
+    title : {
+				text : "Selection Sort Visualizer"
+			},
+      data: [
+      {      
+        indexLabelFontSize: 25,
+        indexLabelFontFamily:"Lucida Console" ,
+        indexLabel: "{y}",
+        type: "column",
+        indexLabelPlacement:"inside",
+        indexLabelOrientation:"horizontal",
+        dataPoints : a,
+      }],
+        });
+        
+      chart.render()
+       
+      var temp1=a.length  
+      var tempo=0
+var calling =  async function () {
+for (let i=tempo;i<a.length;i++){
+    var min=i;
+        for (var j=i+1;j<a.length;j++){
+            if(a[j].y<a[min].y)
+                min=j
+}
+    var temp = a[i].y;
+    a[i].y = a[min].y;
+    a[min].y = temp;   
+    chart.render()
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
+tempo++
+break
+}
+}
+setInterval(function(){ calling()},2000)
+
+}	
+</script>
+</head>
+<body>
+<div id = "chartContainer" style = "height: 300px; width: 100%;" />
+</body>
+</html>
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>
